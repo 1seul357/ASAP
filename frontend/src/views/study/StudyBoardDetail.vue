@@ -1,16 +1,23 @@
-<template>    <!--전체적으로 수정-->
-<section>
-  <div class="page-header2">
-    <div class="d-flex justify-content-center">
-      <font-awesome-icon icon="fa-solid fa-child" class="icon fa-5x" style="color: rgb(231, 223, 223);" />
-      <div>
-        <h5 id="massage">해당 스터디에 가입하고 싶다면 신청하기 버튼을 눌러주세요!</h5>
-        <h5>스터디에 대한 설명과 참여한 사람들의 정보를 확인할 수 있습니다.</h5>
+<template>
+  <section>
+    <div class="page-header2">
+      <div class="d-flex justify-content-center">
+        <font-awesome-icon
+          icon="child"
+          class="icon fa-5x"
+          style="color: rgb(231, 223, 223)"
+        />
+        <div>
+          <h5 id="massage">
+            해당 스터디에 가입하고 싶다면 신청하기 버튼을 눌러주세요!
+          </h5>
+          <h5>
+            스터디에 대한 설명과 스터디 회원들의 정보를 확인할 수 있습니다.
+          </h5>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="container">
-    <div>
+    <div class="container">
       <div class="row">
         <div class="d-flex col-12 header" name="detail-header">
           <div class="col-8 mainheader">
@@ -23,33 +30,30 @@
             </div>
           </div>
           <div class="col-4 subheader">
-            <div>
-              <div class="tags" v-for="tag in studytag" v-bind:key="tag">
-                <span class="badge smalltag">{{ tag }}</span
-                >&nbsp;
-              </div>
+            <div class="tags" v-for="tag in studytag" v-bind:key="tag">
+              <span class="badge badge-dark">{{ tag }}</span
+              >&nbsp;
             </div>
-            <div>
-              <div class="boardinfo">
-                {{ nickname }} &nbsp;|&nbsp; {{ timestamp }} &nbsp; | &nbsp;
-                <i class="fas fa-eye" /> {{ hit }}
-              </div>
+            <div class="boardinfo">
+              {{ nickname }} &nbsp;|&nbsp; {{ timestamp }} &nbsp; | &nbsp;
+              <i class="fas fa-eye" /> {{ hit }}
             </div>
           </div>
         </div>
         <div class="d-flex col-12 content" name="detail-body">
           <div class="col-8 justify-content-start" name="study data">
             <div name="description" class="description">
-              <p align="left" style="white-space: pre;">
+              <p align="left" style="white-space: pre">
                 {{ description }}
               </p>
             </div>
             <div align="left" class="contact" name="link">
-              <font-awesome-icon icon="fa-solid fa-link" /> &nbsp;
+              <font-awesome-icon icon="link" /> &nbsp;
               <span>{{ link }}</span>
             </div>
             <div align="left" class="contact" name="call">
-              <font-awesome-icon icon="fa-solid fa-phone" class="fas" /> &nbsp;
+              <font-awesome-icon icon="phone" class="fas" />
+              &nbsp;
               {{ call }}
             </div>
           </div>
@@ -67,7 +71,9 @@
                     <img src="../../views/accounts/assets/default.png" />
                   </p>
                   <p>
-    <!--수정-->     <a id="show-btn"
+                    <!--수정-->
+                    <a
+                      id="show-btn"
                       type="button"
                       class="mt-1"
                       @click="showModal(member)"
@@ -103,11 +109,8 @@
                     <img src="../../views/accounts/assets/default.png" />
                   </p>
                   <p class="mt-2">
-   <!--수정-->      <a
-                      id="show-btn"
-                      type="button"
-                      @click="showModal(member)"
-                    >
+                    <!--수정-->
+                    <a id="show-btn" type="button" @click="showModal(member)">
                       {{ member.nickname }}</a
                     >
                   </p>
@@ -125,17 +128,19 @@
                   >
                     <p v-if="member.image">
                       <img :src="member.image" />
-    <!--수정-->        <a
+                      <!--수정-->
+                      <a
                         id="show-btn"
                         type="button"
-                        style="margin-left: -10px;"
+                        style="margin-left: -10px"
                         @click="showModal(member)"
                         >{{ member.nickname }}</a
                       >
                     </p>
                     <p v-else>
                       <img src="../../views/accounts/assets/default.png" />
-  <!--수정-->         <a
+                      <!--수정-->
+                      <a
                         id="show-btn"
                         type="button"
                         @click="showModal(member)"
@@ -171,11 +176,8 @@
                     <img src="../../views/accounts/assets/default.png" />
                   </p>
                   <p class="mt-2">
-   <!--수정-->      <a
-                      id="show-btn"
-                      type="button"
-                      @click="showModal(member)"
-                    >
+                    <!--수정-->
+                    <a id="show-btn" type="button" @click="showModal(member)">
                       {{ member.nickname }}</a
                     >
                   </p>
@@ -200,25 +202,34 @@
             <br />
             <div name="buttons" class="buttons">
               <div v-if="flag === 2">
-                <button type="button" class="btn" @click="studyApply"><strong>
-                  <font-awesome-icon icon="fa-solid fa-hand-pointer" />
-                  신청하기</strong>
+                <button type="button" class="btn" @click="studyApply">
+                  <strong>
+                    <font-awesome-icon icon="pointer" />
+                    신청하기</strong
+                  >
                 </button>
               </div>
-              <div v-if="flag === 1" disabled="”disabled”">
-                <button type="button" id="btn" class="btn">
+              <div v-if="flag === 1" disabled="disabled">
+                <b-button type="button" id="btn" class="btn">
                   이미 신청한 스터디입니다.
-                </button>
+                </b-button>
               </div>
-              <div class="button1" v-if="flag === 0">
-                
-                <button type="button" class="btn col-5" @click="studyAccept"><font-awesome-icon icon="fa-solid fa-check" /> 가입 수락</button>
-                <button type="button" class="btn col-5" @click="studyRefuse">X 가입 거절</button>
+              <div v-if="flag === 0">
+                <b-button class="btn col-5" @click="studyAccept">
+                  <font-awesome-icon icon="check" /> 가입 수락
+                </b-button>
+                <b-button class="btn col-5" @click="studyRefuse">
+                  X 가입 거절
+                </b-button>
                 <router-link :to="`/study/board/update/${boardno}`">
-                  <button type="button" class="btn col-5"><font-awesome-icon icon="fa-solid fa-pen" /> 수정하기</button>
+                  <b-button class="btn col-5">
+                    <font-awesome-icon icon="pen" /> 수정하기
+                  </b-button>
                 </router-link>
                 <router-link :to="{}">
-                <button type="button" class="btn col-5" @click="deleteBoard(boardno)"><font-awesome-icon icon="fa-solid fa-trash" /> 삭제하기</button>
+                  <b-button class="btn col-5" @click="deleteBoard(boardno)">
+                    <font-awesome-icon icon="trash" /> 삭제하기
+                  </b-button>
                 </router-link>
               </div>
             </div>
@@ -226,8 +237,7 @@
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 </template>
 
 <script>
@@ -267,14 +277,14 @@ export default {
     };
   },
   created() {
-    const token = sessionStorage.getItem("jwt");             // 수정
+    const token = localStorage.getItem("jwt"); // 수정
     const decoded = jwt_decode(token);
     const userno = decoded.userno;
     this.userno = userno;
     this.boardno = this.$route.params.boardno;
     axios({
       method: "get",
-      url: `https://i6a107.p.ssafy.io:8443/api/v1/board/${this.boardno}`,
+      url: `${process.env.VUE_APP_SERVER_URL}board/${this.boardno}`,
     })
       .then((res) => {
         console.log(res.data);
@@ -340,7 +350,7 @@ export default {
 
   methods: {
     setToken: function () {
-      const token = sessionStorage.getItem("jwt");            // 수정
+      const token = localStorage.getItem("jwt"); // 수정
       const config = {
         Authorization: `JWT ${token}`,
       };
@@ -353,7 +363,7 @@ export default {
     getUserInformation: function (user) {
       axios({
         method: "get",
-        url: `https://i6a107.p.ssafy.io:8443/api/v1/admin/${user.userno}/`,
+        url: `${process.env.VUE_APP_SERVER_URL}admin/${user.userno}/`,
         headers: this.setToken(),
       })
         .then((res) => {
@@ -377,7 +387,7 @@ export default {
       // }
       axios({
         method: "post",
-        url: "https://i6a107.p.ssafy.io:8443/api/v1/study/apply",
+        url: `${process.env.VUE_APP_SERVER_URL}study/apply`,
         headers: this.setToken(),
         data: data,
       })
@@ -404,7 +414,7 @@ export default {
         };
         axios({
           method: "put",
-          url: "https://i6a107.p.ssafy.io:8443/api/v1/study/accept",
+          url: `${process.env.VUE_APP_SERVER_URL}study/accept`,
           headers: this.setToken(),
           data: data,
         })
@@ -427,7 +437,7 @@ export default {
         };
         axios({
           method: "put",
-          url: "https://i6a107.p.ssafy.io:8443/api/v1/study/accept",
+          url: `${process.env.VUE_APP_SERVER_URL}study/accept`,
           headers: this.setToken(),
           data: data,
         })
@@ -444,7 +454,7 @@ export default {
     deleteBoard: function (boardno) {
       axios({
         method: "delete",
-        url: `https://i6a107.p.ssafy.io:8443/api/v1/board/${boardno}`,
+        url: `${process.env.VUE_APP_SERVER_URL}board/${boardno}`,
         headers: this.setToken(),
       })
         .then((res) => {
@@ -459,21 +469,18 @@ export default {
 };
 </script>
 <style scoped>
-section {
-  margin-top: 4rem;               /* 수정 */
-}
 .page-header2 {
   width: 100%;
   height: 150px;
-  background-color: #394E79;
+  background-color: #394e79;
 }
 h5 {
   color: rgb(231, 223, 223);
-  font-family: 'Ubuntu', sans-serif;
+  font-family: "Ubuntu", sans-serif;
   margin-bottom: 0px;
 }
-#massage{
-  margin-top: 3rem;
+#massage {
+  margin-top: 3.5rem;
 }
 .icon {
   margin-top: 2rem;
@@ -482,6 +489,7 @@ h5 {
 button {
   font-size: 15px;
   background-color: rgb(130, 163, 209);
+  border-color: white;
 }
 button:hover {
   background-color: rgb(79, 138, 216);

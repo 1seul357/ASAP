@@ -1,54 +1,91 @@
 # ASAP
 
-#### 프로젝트 소개
+> ASAP은 화상회의를 통한 스터디 진행 뿐만 아니라 과제 업로드, 일정 체크까지 한 곳에서 진행할 수 있는 웹 서비스입니다. 
+>
+> 또한 사용자의 스터디 진행량을 분석해주고, 사용자는 ASAP을 통해 원하는 스터디에 가입할 수 있고, 찾고 있는 스터디가 없다면 직접 모집할 수도 있습니다.
 
-​	ASAP은 'As Study as possible'을 줄여서 만든 네이밍으로, 화상회의를 통한 스터디 진행, 과제 파일 업로드, 스터디 일정 체크 및 스터디 진행량의 분석까지 한 곳에서 진행할 수 있	는 웹 서비스입니다.
+<br>
 
-- **기획배경**
+### 목차
 
-  > ASAP을 기획하게 된 이유는 크게 세가지입니다.
-  >
-  > 첫째, 스터디를 구하고는 싶어도 어디서 구할 수 있는 지 찾기 어렵다는 점, 스터디원을 모집하기도 힘들다는 점입니다. 
-  >
-  > 둘째, 각 스터디마다 일정이나 과제를 관리하기 번거롭습니다.
-  >
-  > 마지막으로, 스터디를 진행할 때마다 너무나 많은 플랫폼을 사용하게 됩니다. 스터디원 모집에는 카카오톡, 실제 스터디 진행은 줌, 웹엑스, 구글 밋같은 플랫폼, 과제는 노션이나 깃으로 제출하는 식으로 하나의 스터디에 수많은 플랫폼이 사용됩니다. 이러한 불편한 점들을 개선하기 위해 ASAP에서는 하나의 웹사이트에서 다양한 기능을 모두 사용할 수 있도록 만들었습니다.
+[1. 주요 기능](#주요 기능)
 
-  ![기획의도](산출물/README.assets/기획의도.PNG)
+[2. 기술 스택](#기술 스택)
 
-- **진행기간**
+[3. 서비스 아키텍처](#서비스 아키텍처)
 
-  2022.01.04 - 2022.02.18 (총 7주)
+[4 문서](#문서)
 
-- **팀 소개**
+[5. 팀원 소개](#팀원 소개)
 
-  Front : 우윤석, 한슬기
+<br>
 
-  Back : 김민준, 김우찬
+### 주요 기능
 
-  RTC : 고주희, 이호진
+![img1](README.assets/img1.PNG)
 
-- **기술스택**
+![img2](README.assets/img2.PNG)
 
-  `Backend` : WebRTC (KURENTO), docker, aws, spring boot, JPA, querydsl
+![img3](README.assets/img3-16452490467252.PNG)
 
-  `Frontend` : Vue.js, Js, HTML, CSS
+![img4](README.assets/img4.PNG)
 
-  `DB` : MySQL, firebase
+![img5](README.assets/img5.PNG)
 
-  
+<br>
 
-![기술스택](산출물/README.assets/기술스택.PNG)
+### 기술 스택
 
+**협업**
 
+- Jira
+- Gitlab
+- Notion
+- Gather
+- Mattermost
 
-#### 주요기능
+**Frontend**
 
-![주요기능1](산출물/README.assets/주요기능1.PNG)
+- Vue.js
+- Vuex
+- HTML/CSS
 
-![주요기능2](산출물/README.assets/주요기능2.PNG)
+**Backend**
 
-![주요기능3](산출물/README.assets/주요기능3.PNG)
+- WebRTC (KURENTO)
+- docker
+- aws
+- spring boot
+- JPA
+- querydsl
+- MySQL
+- firebase
 
+<br>
 
+### 서비스 아키텍처
 
+![A107_시스템구성도](README.assets/A107_시스템구성도.png)
+
+<br>
+
+### 문서
+
+- <a href="https://github.com/1seul357/ASAP/blob/master/%EC%82%B0%EC%B6%9C%EB%AC%BC/A107_ClassDiagram.png">클래스 다이어그램</a>
+
+- <a href="https://github.com/1seul357/ASAP/blob/master/%EC%82%B0%EC%B6%9C%EB%AC%BC/A107_ERD.png">ERD</a>
+
+- <a href="https://github.com/1seul357/FOR-EAT/blob/develop/docs/API_%EB%AA%85%EC%84%B8%EC%84%9C.pdf">API 명세서</a>
+
+- <a href="https://github.com/1seul357/ASAP/blob/master/%EC%82%B0%EC%B6%9C%EB%AC%BC/A107_%EC%99%80%EC%9D%B4%EC%96%B4%ED%94%84%EB%A0%88%EC%9E%84.pdf">와이어프레임</a>
+- <a href="https://github.com/1seul357/ASAP/blob/master/%EC%82%B0%EC%B6%9C%EB%AC%BC/A107_%ED%99%94%EC%83%81%EC%B1%84%ED%8C%85_%EC%8B%9C%ED%80%80%EC%8A%A4%EB%8B%A4%EC%9D%B4%EC%96%B4%EA%B7%B8%EB%9E%A8.png">시퀀스 다이어그램</a>
+
+<br>
+
+### 팀원 소개
+
+`Frontend`: 우윤석, 한슬기
+
+`Backend` : 김민준, 김우찬
+
+`WebRTC` : 고주희, 이호진

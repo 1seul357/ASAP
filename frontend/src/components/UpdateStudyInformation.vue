@@ -8,27 +8,36 @@
           label="Name"
           lebel-for="input-title"
         >
-        <div class="d-flex justify-content-between">
-          <b-form-input
-            id="input-title"
-            v-model="information.studyname"
-            type = "text"
-            style="width: 75%"
-            disabled
-          ></b-form-input>
-        </div>
+          <div class="d-flex justify-content-between">
+            <b-form-input
+              id="input-title"
+              v-model="information.studyname"
+              type="text"
+              style="width: 75%"
+              disabled
+            ></b-form-input>
+          </div>
         </b-form-group>
-        <b-form-group
-          label="Subject"
-          label-for="interests"
-        >
-          <b-form-select name="interests" id="interests" v-model="information.category">
-            <option value="" selected disabled hidden>주제를 선택해주세요</option>
-            <option v-for="interest in interestsList" :key="interest.id" :value="interest.iname">{{ interest.iname }}</option>
+        <b-form-group label="Subject" label-for="interests">
+          <b-form-select
+            name="interests"
+            id="interests"
+            v-model="information.category"
+          >
+            <option value="" selected disabled hidden>
+              주제를 선택해주세요
+            </option>
+            <option
+              v-for="interest in interestsList"
+              :key="interest.id"
+              :value="interest.iname"
+            >
+              {{ interest.iname }}
+            </option>
           </b-form-select>
         </b-form-group>
         <b-form-tags
-          input-id="interests" 
+          input-id="interests"
           v-model="information.interests"
           tag-variant="primary"
           tag-pills
@@ -43,7 +52,7 @@
           <b-form-textarea
             id="input-description"
             v-model="information.description"
-            type = "text"
+            type="text"
             rows="6"
             max-rows="6"
             required
@@ -60,98 +69,99 @@
           >
           </study-member-count-bar>
         </b-form-group>
-        <b-button @click="updateStudyInformation" style="width: 100%">완료</b-button>
+        <b-button @click="updateStudyInformation" style="width: 100%"
+          >완료</b-button
+        >
       </b-form>
     </b-modal>
   </div>
 </template>
 
 <script>
-import interest from "@/views/accounts/assets/interests.json"
-import StudyMemberCountBar from '@/components/StudyMemberCountBar.vue'
-import axios from 'axios'
-
+import interest from "@/views/accounts/assets/interests.json";
+import StudyMemberCountBar from "@/components/StudyMemberCountBar.vue";
+import axios from "axios";
 
 export default {
-  name: 'UpdateStudyInformation',
-  components: { 
+  name: "UpdateStudyInformation",
+  components: {
     StudyMemberCountBar,
   },
   data: function () {
     return {
-      interestsList : interest,
+      interestsList: interest,
       information: {
         studyno: this.studyInformation.studyno,
         description: null,
         interests: null,
         category: null,
         memberno: null,
-      }
-    }
+      },
+    };
   },
   props: {
     studyInformation: {
-      type: Object
+      type: Object,
     },
     interestList: {
-      type: Array
-    }
+      type: Array,
+    },
   },
   methods: {
     setToken: function () {
-      const token = sessionStorage.getItem('jwt')            // 수정
+      const token = sessionStorage.getItem("jwt"); // 수정
       const config = {
-        Authorization: `JWT ${token}`
-      }
-      return config
+        Authorization: `JWT ${token}`,
+      };
+      return config;
     },
     showModal() {
-      this.information.studyname = this.studyInformation.studyname
-      this.information.description = this.studyInformation.description
-      this.information.memberno = this.studyInformation.memberno
-      
-      this.information.category = this.studyInformation.category
-      this.information.interests = this.interestList
-      this.$refs['my-modal'].show()
+      this.information.studyname = this.studyInformation.studyname;
+      this.information.description = this.studyInformation.description;
+      this.information.memberno = this.studyInformation.memberno;
+
+      this.information.category = this.studyInformation.category;
+      this.information.interests = this.interestList;
+      this.$refs["my-modal"].show();
     },
     updateMember(memberNum) {
-      this.memberno=memberNum
+      this.memberno = memberNum;
       //console.log(this.member)
     },
     updateStudyInformation: function () {
       axios({
-        method: 'put',
-        url: `https://i6a107.p.ssafy.io:8443/api/v1/study/modify`,
+        method: "put",
+        url: `${process.env.VUE_APP_SERVER_URL}study/modify`,
         data: this.information,
         headers: this.setToken(),
       })
-        .then(res => {
-          console.log(res)
-          window.location.reload()
+        .then((res) => {
+          console.log(res);
+          window.location.reload();
         })
-        .catch(err => {
-          console.log(err)
-        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     created: function () {
-      console.log(this.studyInformation, 999)
-    }
-  }
-}
+      console.log(this.studyInformation, 999);
+    },
+  },
+};
 </script>
 
 <style scoped>
-  button { 
-    font-size: 11px; 
-    height: 38px; 
-    background-color: rgb(130, 163, 209); 
-  } 
-  button:hover { 
-    background-color: rgb(79, 138, 216); 
-  }
-  .updateBtn {
-    position: fixed;
-    bottom: 8px;
-    right: 16px;
-  }
+button {
+  font-size: 11px;
+  height: 38px;
+  background-color: rgb(130, 163, 209);
+}
+button:hover {
+  background-color: rgb(79, 138, 216);
+}
+.updateBtn {
+  position: fixed;
+  bottom: 8px;
+  right: 16px;
+}
 </style>

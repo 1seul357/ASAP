@@ -1,10 +1,9 @@
-<template>   <!--전체적으로 수정-->
+<template>
   <div id="container">
     <h5 class="d-flex justify-content-start"><strong>스터디 분석</strong></h5>
     <p>
       {{ userName }}님의 한달 스터디 시간은 {{ parseInt(totalTime) }}분입니다.
     </p>
-    <!--수정-->
     <pie-chart :chart-data="datacollection" style="width: 350px"></pie-chart>
   </div>
 </template>
@@ -80,7 +79,6 @@ export default {
   },
   created: function () {
     if (sessionStorage.getItem("jwt")) {
-      // 수정
       const token = sessionStorage.getItem("jwt"); // 수정
       const decoded = jwt_decode(token);
       this.userName = decoded.nickname;

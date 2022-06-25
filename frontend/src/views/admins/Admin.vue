@@ -1,7 +1,6 @@
-<template>   <!--전체적으로 수정-->
-<section>
+<template>
   <div class="container">
-    <h2 class="float-left" style="font-family: 'Black Han Sans', sans-serif;"><strong>회원 리스트</strong></h2>
+    <h3 class="float-left"><strong>회원리스트</strong></h3>
     <table class="table table-bordered table-hover">
       <thead>
         <tr>
@@ -22,7 +21,13 @@
           <td v-if="user.delFlag == 0">가입</td>
           <td v-else>탈퇴</td>
           <td v-if="user.delFlag == 0">
-            <b-button id="show-btn" class="mt-0" size="sm" style="background-color: rgb(221, 182, 74);" @click="showModal(user)">Detail</b-button>
+            <b-button
+              id="show-btn"
+              size="sm"
+              style="background-color: rgb(221, 182, 74)"
+              @click="showModal(user)"
+              >Detail</b-button
+            >
           </td>
         </tr>
       </tbody>
@@ -30,28 +35,39 @@
     <b-modal ref="my-modal" :member="member" hide-header hide-footer>
       <div class="d-block text-center">
         <div v-if="member">
-          <user-info-modal :member="member" :studylist="studylist"></user-info-modal>
+          <user-info-modal
+            :member="member"
+            :studylist="studylist"
+          ></user-info-modal>
         </div>
       </div>
       <div class="float-right mt-4">
-        <b-button style="background-color: #A5A6F6;" @click="userUpdate(member.userno)">수정</b-button>&nbsp;
-        <b-button style="background-color: #A5A6F6;" @click="userDelete(member.userno)">강퇴</b-button>&nbsp;
-        <b-button style="background-color: #A5A6F6;" @click="hideModal">취소</b-button>
-    </div>
+        <b-button
+          style="background-color: #a5a6f6"
+          @click="userUpdate(member.userno)"
+          >수정</b-button
+        >&nbsp;
+        <b-button
+          style="background-color: #a5a6f6"
+          @click="userDelete(member.userno)"
+          >강퇴</b-button
+        >&nbsp;
+        <b-button style="background-color: #a5a6f6" @click="hideModal"
+          >취소</b-button
+        >
+      </div>
     </b-modal>
   </div>
-</section>
 </template>
 
 <script>
-import axios from 'axios'
-import jwt_decode from 'jwt-decode'
-import UserInfoModal from '@/components/UserInfoModal.vue'
+import axios from "axios";
+import UserInfoModal from "@/components/UserInfoModal.vue";
 
 export default {
-  name: 'Admin',
+  name: "Admin",
   components: {
-    UserInfoModal
+    UserInfoModal,
   },
   data: function () {
     return {
@@ -59,99 +75,84 @@ export default {
       member: null,
       modal: false,
       studylist: null,
-    }
+    };
   },
   methods: {
     setToken: function () {
-      const token = sessionStorage.getItem('jwt')
+      const token = localStorage.getItem("jwt");
       const config = {
-        Authorization: `JWT ${token}`
-      }
-      return config
+        Authorization: `JWT ${token}`,
+      };
+      return config;
     },
     showModal: function (user) {
-      this.$refs['my-modal'].show()
-      this.getUserInformation(user)
+      this.$refs["my-modal"].show();
+      this.getUserInformation(user);
     },
     hideModal() {
-      this.$refs['my-modal'].hide()
+      this.$refs["my-modal"].hide();
     },
     getUserList: function () {
       axios({
-        method: 'get',
-        url: 'https://i6a107.p.ssafy.io:8443/api/v1/admin/userlist',
+        method: "get",
+        url: `${process.env.VUE_APP_SERVER_URL}admin/userlist`,
         headers: this.setToken(),
       })
-        .then(res => {
-          console.log(res.data)
-          this.userlist = res.data
+        .then((res) => {
+          console.log(res.data);
+          this.userlist = res.data;
         })
-        .catch(err => {
-          console.log(err)
-        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     getUserInformation: function (user) {
       axios({
-        method: 'get',
-        url: `https://i6a107.p.ssafy.io:8443/api/v1/admin/${user.userno}/`,
+        method: "get",
+        url: `${process.env.VUE_APP_SERVER_URL}admin/${user.userno}/`,
         headers: this.setToken(),
       })
-        .then(res => {
-          console.log(res)
-          this.member = res.data.user
-          this.studylist = res.data.studyList
+        .then((res) => {
+          console.log(res);
+          this.member = res.data.user;
+          this.studylist = res.data.studyList;
         })
-        .catch(err => {
-          console.log(err)
-        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     userDelete: function (userNo) {
       axios({
-        method: 'delete',
-        url: `https://i6a107.p.ssafy.io:8443/api/v1/user/${userNo}/`,
+        method: "delete",
+        url: `${process.env.VUE_APP_SERVER_URL}user/${userNo}/`,
         headers: this.setToken(),
       })
-        .then(res => {
-          console.log(res)
-          window.location.reload()
+        .then((res) => {
+          console.log(res);
+          window.location.reload();
         })
-        .catch(err => {
-          console.log(err)
-        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     userUpdate: function (userNo) {
-      this.$router.push({ name: 'ProfileEdit', params: { user_no : userNo }})
-    }
+      this.$router.push({ name: "ProfileEdit", params: { user_no: userNo } });
+    },
   },
   created: function () {
-    if (sessionStorage.getItem('jwt')) {
-      const token = sessionStorage.getItem('jwt')
-      const decoded = jwt_decode(token)
-      if (decoded.isAdmin == 1)
-        {
-          this.getUserList()
-        } else {
-          this.$router.push({name: 'Login'})
-        }
-    } else {
-      this.$router.push({name: 'Login'})
-    }
+    this.getUserList();
   },
-}
+};
 </script>
 
 <style scoped>
-  th {
-    background-color: #E9DDF4;
-  }
-  button {
-    font-size: 11px;
-  }
-  td {
-    margin-top: 1rem;
-  }
-  section {
-    margin-top : 5rem;
-    margin-bottom: 10rem;
-  }
+.container {
+  margin-top: 5rem;
+}
+th {
+  background-color: #e9ddf4;
+}
+button {
+  font-size: 11px;
+}
 </style>
