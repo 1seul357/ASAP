@@ -72,11 +72,8 @@
 ### 문서
 
 - <a href="https://github.com/1seul357/ASAP/blob/master/%EC%82%B0%EC%B6%9C%EB%AC%BC/A107_ClassDiagram.png">클래스 다이어그램</a>
-
 - <a href="https://github.com/1seul357/ASAP/blob/master/%EC%82%B0%EC%B6%9C%EB%AC%BC/A107_ERD.png">ERD</a>
-
 - <a href="https://github.com/1seul357/FOR-EAT/blob/develop/docs/API_%EB%AA%85%EC%84%B8%EC%84%9C.pdf">API 명세서</a>
-
 - <a href="https://github.com/1seul357/ASAP/blob/master/%EC%82%B0%EC%B6%9C%EB%AC%BC/A107_%EC%99%80%EC%9D%B4%EC%96%B4%ED%94%84%EB%A0%88%EC%9E%84.pdf">와이어프레임</a>
 - <a href="https://github.com/1seul357/ASAP/blob/master/%EC%82%B0%EC%B6%9C%EB%AC%BC/A107_%ED%99%94%EC%83%81%EC%B1%84%ED%8C%85_%EC%8B%9C%ED%80%80%EC%8A%A4%EB%8B%A4%EC%9D%B4%EC%96%B4%EA%B7%B8%EB%9E%A8.png">시퀀스 다이어그램</a>
 
